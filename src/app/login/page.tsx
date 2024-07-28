@@ -1,12 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { Client, Account } from "appwrite";
-
+import user from "../appWriteConfig"
+  
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
   return (
     <div className="flex p-4 space-x-5">
       <input
@@ -40,7 +39,6 @@ const Login: React.FC = () => {
       </button>
       <button
         onClick={() => {
-          console.log(email);
         }}
       >
         show
