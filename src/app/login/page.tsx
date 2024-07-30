@@ -1,11 +1,35 @@
 "use client";
 import React, { useState } from "react";
-import user from "../appWriteConfig"
-  
-const Login: React.FC = () => {
+import { account } from "../appWriteConfig";
+import { ID } from "appwrite";
+
+function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const addUser = async () => {
+    try {
+      // Create the user
+      const createResponse = await account.create(ID.unique(), email, password);
+      console.log(createResponse);
+      alert("User added successfully!");
+
+      // Log in the user to create a session
+      const sessionResponse = await account.createSession(email, password);
+      console.log('User session created:', sessionResponse);
+
+      // Create the verification
+      const verificationResponse = await account.createVerification(`${process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT}/verification`);
+      console.log(verificationResponse);
+      alert("Verification email sent!");
+    
+    } catch (error: any) {
+      console.log('Error:', error);
+      alert(`Error: ${error.message}`);
+    }
+  };
+
   return (
     <div className="flex p-4 space-x-5">
       <input
@@ -28,23 +52,14 @@ const Login: React.FC = () => {
       />
       <button
         onClick={() => {
-          if(showPassword === false){
-            setShowPassword(true);
-          } else {
-            setShowPassword(false);
-          }
+          setShowPassword(!showPassword);
         }}
       >
-        show password
+        {showPassword ? "Hide password" : "Show password"}
       </button>
-      <button
-        onClick={() => {
-        }}
-      >
-        show
-      </button>
+      <button onClick={addUser}>Register</button>
     </div>
   );
-};
+}
 
 export default Login;
