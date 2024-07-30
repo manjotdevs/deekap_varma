@@ -16,12 +16,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isLoginPage = '/login';
 
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        {!isLoginPage && <Header />}
+        <Header />
         {children}
       </body>
     </html>
