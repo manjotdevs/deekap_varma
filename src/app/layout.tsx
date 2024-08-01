@@ -1,14 +1,14 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import Header from '@/components/header';
-import React from 'react';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import React from "react";
+import Header from "@/components/header";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Deepak Verma',
-  description: 'Deepak Verma jewellers',
+  title: "Deepak Verma",
+  description: "Deepak Verma jewellers",
 };
 
 export default function RootLayout({
@@ -16,7 +16,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
