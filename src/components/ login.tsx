@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { account } from "@/app/appWriteConfig";
 import { ID } from "appwrite";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "./ui/input";
+import SignInWithGoogle from "@/app/auth/google/googleSignIn";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -63,43 +62,42 @@ const Login = () => {
   };
 
   return (
-    <div className="flex p-4 space-x-5">
-      <input
-        className="text-black"
-        type="text"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        className="text-black"
-        type={showPassword ? "text" : "password"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button onClick={() => setShowPassword(!showPassword)}>
-        {showPassword ? "Hide password" : "Show password"}
-      </button>
-      <button onClick={addUser}>Register</button>
-      <button onClick={loginUser}>Login</button>
-      <AlertDialog>
-        <AlertDialogTrigger>Open</AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+    <Dialog>
+      <DialogTrigger>Sign in</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Sign in</DialogTitle>
+          <DialogDescription className="">
+            <p>Email</p>
+            <Input
+              className="text-black rounded-xs h-5 w-48"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+            />
+            </DialogDescription>
+            <DialogDescription>
+            <Input
+              className="text-black rounded-xs h-5 w-48"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <button onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? "Hide password" : "Show password"}
+            </button>
+            <button onClick={addUser}>Register</button>
+            <button onClick={loginUser}>Login</button>
+          </DialogDescription>
+          <DialogDescription>
+            <SignInWithGoogle />
+          </DialogDescription>
+        </DialogHeader>
+
+      </DialogContent>
+    </Dialog>
   );
 };
 
