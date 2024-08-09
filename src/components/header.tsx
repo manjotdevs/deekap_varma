@@ -1,10 +1,7 @@
-"use client";
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { FaShoppingCart } from "react-icons/fa";
-import { LuPackagePlus } from "react-icons/lu";
 import { LuPackageCheck } from "react-icons/lu";
 export default function Header() {
   return (
